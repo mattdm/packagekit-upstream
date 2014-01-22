@@ -641,17 +641,9 @@ zypp_logging ()
 gboolean
 zypp_is_changeable_media (const Url &url)
 {
-	gboolean is_cd = false;
-	try {
-		media::MediaManager mm;
-		media::MediaAccessId id = mm.open (url);
-		is_cd = mm.isChangeable (id);
-		mm.close (id);
-	} catch (const media::MediaException &e) {
-		// TODO: Do anything about this?
-	}
-
-	return is_cd;
+	// Copied from MediaManager::isChangeable() in libzypp's MediaManager.cpp
+	// This avoids a network roundtrip just to check if it's a CD/DVD.
+	return (url.getScheme() == "cd" || url.getScheme() == "dvd");
 }
 
 namespace {
