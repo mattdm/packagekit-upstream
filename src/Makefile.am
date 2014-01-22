@@ -23,6 +23,7 @@ AM_CPPFLAGS =						\
 	$(NETWORK_MANAGER_CFLAGS)			\
 	$(CONNMAN_CFLAGS)				\
 	$(SYSTEMD_CFLAGS)				\
+	$(MCE_CFLAGS)					\
 	-DPACKAGE_LOCALE_DIR=\"$(localedir)\"		\
 	-DBINDIR=\"$(bindir)\"				\
 	-DSBINDIR=\"$(sbindir)\"			\
@@ -158,6 +159,7 @@ packagekitd_LDADD =					\
 	$(POLKIT_LIBS)					\
 	$(GIO_LIBS)					\
 	$(ARCHIVE_LIBS)					\
+	$(MCE_LIBS)					\
 	$(SYSTEMD_LIBS)
 
 packagekitd_LDFLAGS =					\
@@ -185,6 +187,7 @@ pk_self_test_LDADD =					\
 	$(POLKIT_LIBS)					\
 	$(GIO_LIBS)					\
 	$(ARCHIVE_LIBS)					\
+	$(MCE_LIBS)					\
 	$(SYSTEMD_LIBS)
 
 pk_self_test_CPPFLAGS =					\
@@ -236,6 +239,7 @@ libpkplugins_la_LIBADD =				\
 	$(POLKIT_LIBS)					\
 	$(GIO_LIBS)					\
 	$(ARCHIVE_LIBS)					\
+	$(MCE_LIBS)					\
 	$(SYSTEMD_LIBS)
 
 

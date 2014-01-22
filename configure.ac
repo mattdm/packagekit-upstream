@@ -248,6 +248,17 @@ fi
 AM_CONDITIONAL(HAVE_SYSTEMD, [test -n "$with_systemdsystemunitdir"])
 
 dnl ---------------------------------------------------------------------------
+dnl - Use mce for preventing system suspend during operation
+dnl ---------------------------------------------------------------------------
+AC_ARG_ENABLE(mce, AS_HELP_STRING([--enable-mce],[enable mce cpu keepalive code]),
+              enable_mce=$enableval,enable_mce=yes)
+AM_CONDITIONAL(PK_BUILD_MCE, test x$enable_mce = xyes)
+if test x$enable_mce = xyes; then
+        PKG_CHECK_MODULES(MCE, mce)
+        AC_DEFINE(PK_BUILD_MCE,1,[Build mce keepalive code])
+fi
+
+dnl ---------------------------------------------------------------------------
 dnl - Generate man pages ? (default enabled)
 dnl ---------------------------------------------------------------------------
 AC_ARG_ENABLE(man_pages, AS_HELP_STRING([--disable-man-pages],[Disable man pages generation]), enable_man_pages=$enableval)
