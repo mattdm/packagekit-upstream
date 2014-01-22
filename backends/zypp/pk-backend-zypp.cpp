@@ -2327,6 +2327,14 @@ backend_install_files_thread (PkBackendJob *job, GVariant *params, gpointer user
 		}
 	}
 
+	// Remove a possibly leftover temporary repository
+	try {
+		RepoInfo oldRepo = manager.getRepositoryInfo("PK_TMP_DIR");
+		manager.removeRepository(oldRepo);
+	} catch (const Exception &ex) {
+		// Repo doesn't exist - this is good, we can create it below
+	}
+
 	// create a plaindir-repo and cache it
 	RepoInfo tmpRepo;
 
