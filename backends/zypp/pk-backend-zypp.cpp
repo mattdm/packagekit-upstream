@@ -3357,6 +3357,11 @@ backend_repo_set_data_thread (PkBackendJob *job, GVariant *params, gpointer user
 		} else if (g_ascii_strcasecmp (parameter, "name") == 0) {
 			repo.setName(value);
 			manager.modifyRepository (repo_id, repo);
+		} else if (g_ascii_strcasecmp (parameter, "refresh-now") == 0) {
+			// Hack to allow refreshing a single repository
+			bool force = (g_ascii_strcasecmp (value, "true") == 0);
+			pk_backend_job_set_status (job, PK_STATUS_ENUM_REFRESH_CACHE);
+			zypp_refresh_meta_and_cache (manager, repo, force);
 		} else if (g_ascii_strcasecmp (parameter, "prio") == 0) {
 			gint prio = 0;
 			gint length = strlen (value);
